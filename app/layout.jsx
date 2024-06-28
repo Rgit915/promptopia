@@ -13,7 +13,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* Main wrapper with a gradient background */}
+        <Provider>
+          {/* Main wrapper with a gradient background */}
         <div className='main'>
           <div className='gradient'></div>
         </div>
@@ -23,6 +24,8 @@ export default function RootLayout({ children }) {
           <Nav /> {/* Include the navigation bar */}
           {children} {/* Render child components */}
         </main>
+        </Provider>
+
       </body>
     </html>
   );
