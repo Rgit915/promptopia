@@ -11,7 +11,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
-
+callbacks:{
   //This is called whenever a session is checked.
   async session({ session }) {
     // Find the user in the database by email
@@ -48,6 +48,8 @@ const handler = NextAuth({
       return false;
     }
   }
+}
+
 });
 
 export { handler as GET, handler as POST };
