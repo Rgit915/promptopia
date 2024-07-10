@@ -1,23 +1,36 @@
 import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 
-console.log("gogg =", ({
-  clientId: process.env.GOOGLE_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-}))
-const handler = NextAuth ({
+import { connectToDB } from "@utils/database";
+
+const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
-  async session({session}) {
+
+  //This is called whenever a session is checked.
+  async session({ session }) {
 
   },
-  async signIn({ profile}) {
 
+  //This is called whenever a user signs in
+  async signIn({ profile }) {
+    try {
+      // Connect to the database
+      await connectToDB();
+
+      // Check if a user already exists
+
+      //ifnot, create a user
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
-})
+});
 
 export { handler as GET, handler as POST };
