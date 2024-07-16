@@ -1,6 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import PromptCard from './PromptCard';
+
+// Component to render a list of PromptCards
+const PromptCardList = ({ data, handleTagClick }) => {
+  return (
+    <div className="mt-16 prompt_layout">
+      {data.map((post) => (
+        <PromptCard
+          key={post._id}
+          post={post}
+          handleTagClick={handleTagClick}
+        />
+      ))}
+    </div>
+  );
+}
 
 // Feed component to manage state and fetch posts
 const Feed = () => {
@@ -36,6 +52,10 @@ useEffect(() =>{
            className="search_input peer"
            />
       </form>
+      <PromptCardList
+        data={posts}
+        handleTagClick={() => {}}
+      />
       </section>
   )
 }
